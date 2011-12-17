@@ -49,3 +49,18 @@ Domain Objects
 - `date_updated`
 - `cover_photo_url`
 - `description`
+
+TODO...
+-------
+
+### Tags
+
+- List all tags
+- List tags by album
+- List tags by photo
+- Search photos using tags
+
+### Comments
+
+- Retrieve the most recent comments
+- Retrieve the comments for a photo
