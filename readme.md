@@ -21,7 +21,7 @@ Example
 Repsository Methods
 -------------------
 
-- `get_albums()`
+- `get_albums`
 - `get_album_by_id(id)`
 - `get_album_by_title(title)`
 - `get_album_by_slug(slug)`

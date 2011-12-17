@@ -4,6 +4,7 @@ require 'rexml/document'
 require 'date'
 require_relative 'album'
 require_relative 'photo'
+require_relative 'tag'
 require_relative 'repository'
 
 module PicasaWebAlbums

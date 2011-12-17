@@ -77,7 +77,6 @@ module PicasaWebAlbums
         tag = Tag.new
         tag.text = entry.elements["title"].text
         tags << tag
-        debugger
       end
       return tags
     end
