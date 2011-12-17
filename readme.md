@@ -27,6 +27,7 @@ Repsository Methods
 - `get_album_by_slug(slug)`
 - `get_photos(album)`
 - `get_photo_by_album_and_id(album, photo_id)`
+- `get_tags`
 
 Domain Objects
 --------------
@@ -50,6 +51,10 @@ Domain Objects
 - `date_updated`
 - `cover_photo_url`
 - `description`
+
+### Tag
+
+- `text`
 
 TODO...
 -------

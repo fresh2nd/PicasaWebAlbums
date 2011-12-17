@@ -69,8 +69,32 @@ module PicasaWebAlbums
       end
       return photo_to_return
     end
+    
+    def get_tags
+      xml = get_tags_xml
+      tags = []
+      xml.root.elements.each("//entry") do |entry|
+        tag = Tag.new
+        tag.text = entry.elements["title"].text
+        tags << tag
+        debugger
+      end
+      return tags
+    end
 
     private
+
+    def get_tags_xml
+      uri = URI("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=tag")
+      request = Net::HTTP::Get.new(uri.request_uri)
+      request['Authorization'] = @authentication_token
+      response = Net::HTTP.start(uri.hostname, uri.port) { |http|
+      http.request(request)
+      }
+      body = response.body
+      xml = REXML::Document.new(body)
+      return xml
+    end
 
     def get_photo_id_from_photo_id_url(photo_id_url)
       start_index = photo_id_url.index('/photoid/') + 9
