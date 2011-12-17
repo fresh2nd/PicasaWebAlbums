@@ -3,7 +3,7 @@ require 'shoulda'
 require_relative '../lib/picasawebalbums'
 
 module PicasaWebAlbums
-  class TestPicasaPhotoRepository < Test::Unit::TestCase
+  class TestPicasaRepository < Test::Unit::TestCase
   
     context "get all albums" do
       repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')

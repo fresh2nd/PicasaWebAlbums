@@ -4,7 +4,7 @@ require 'rexml/document'
 require 'date'
 require_relative 'album'
 require_relative 'photo'
-require_relative 'photo_repository'
+require_relative 'repository'
 
 module PicasaWebAlbums
   def self.get_repository(email, password)
