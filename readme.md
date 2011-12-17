@@ -3,22 +3,22 @@ PicasaWebAlbums
 
 Gem for accessing photos and albums from Picasa Web Albums
 
-Rails Integration
------------------
+Integration
+-----------
 
 Add this line to the application's Gemfile:
 
 	gem 'googleapis', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'
 
 Example
---------
+-------
 
-	picasa_repo = Googleapis.picasa('someperson@gmail.com', 'somepassword')
+	picasa_repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
 	albums = picasa_repo.get_albums
 	photos = picasa_repo.get_photos(albums[0])
 
-Methods
--------
+Repsository Methods
+-------------------
 
 - `get_albums()`
 - `get_album_by_id(id)`
@@ -27,10 +27,10 @@ Methods
 - `get_photos(album)`
 - `get_photo_by_album_and_id(album, photo_id)`
 
-Properties
-----------
+Domain Objects
+--------------
 
-Photo class:
+### Photo
 
 - `id`
 - `url`
@@ -39,7 +39,7 @@ Photo class:
 - `height`
 - `file_name`
 
-Album class:
+### Album
 
 - `id`
 - `photos`
