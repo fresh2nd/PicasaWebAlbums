@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = PicasaWebAlbums::VERSION
   s.authors     = ["Martin Kraft"]
   s.email       = ["martinkraft@gmail.com"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/mkraft/PicasaWebAlbums"
   s.summary     = %q{Provides programmatic access to Picasa Web Albums data.}
   s.description = File.read(File.join(File.dirname(__FILE__), 'readme.md'))
 
