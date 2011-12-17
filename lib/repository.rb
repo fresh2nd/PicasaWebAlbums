@@ -5,7 +5,7 @@ module PicasaWebAlbums
       @authentication_token = get_authentication_token(email, password)
     end
 
-    def get_albums
+    def get_all_albums
       xml = get_multiple_album_xml
       albums = []
       xml.root.elements.each("//entry") do |entry|
@@ -23,28 +23,28 @@ module PicasaWebAlbums
     end
 
     def get_album_by_id(id)
-      albums = get_albums
+      albums = get_all_albums
       index_of_album_with_id = albums.find_index{|album| album.id == id.to_s}
       album_to_return = albums[index_of_album_with_id]
       return album_to_return
     end
 
     def get_album_by_title(title)
-      albums = get_albums
+      albums = get_all_albums
       index_of_album_with_title = albums.find_index{|album| album.title == title.to_s}
       album_to_return = albums[index_of_album_with_title]
       return album_to_return
     end
 
     def get_album_by_slug(slug)
-      albums = get_albums
+      albums = get_all_albums
       index_of_album_with_slug = albums.find_index{|album| album.slug == slug.to_s}
       album_to_return = albums[index_of_album_with_slug]
       return album_to_return
     end
 
-    def get_photos(album)
-      xml = get_single_album_xml(album.id)
+    def get_photos_by_album_id(id)
+      xml = get_single_album_xml(id)
       photos = []
       xml.root.elements.each("//entry") do |entry|
         photo = Photo.new
@@ -59,18 +59,18 @@ module PicasaWebAlbums
       return photos
     end
 
-    def get_photo_by_album_and_id(album, id)
-      photos = get_photos(album)
+    def get_photo_by_album_id_and_photo_id(album_id, photo_id)
+      photos = get_photos_by_album_id(album_id)
       photo_to_return = Photo.new
       photos.each do |photo|
-        if photo.id == id
+        if photo.id == photo_id
         photo_to_return = photo
       end
       end
       return photo_to_return
     end
     
-    def get_tags
+    def get_all_tags
       xml = get_tags_xml
       tags = []
       xml.root.elements.each("//entry") do |entry|
@@ -79,6 +79,12 @@ module PicasaWebAlbums
         tags << tag
       end
       return tags
+    end
+    
+    def get_tags_by_album_id(album)
+    end
+    
+    def get_tags_by_photo_id(photo)
     end
 
     private

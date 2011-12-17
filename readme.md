@@ -21,13 +21,21 @@ Example
 Repsository Methods
 -------------------
 
-- `get_albums`
+### Album(s)
+
+- `get_all_albums`
 - `get_album_by_id(id)`
 - `get_album_by_title(title)`
 - `get_album_by_slug(slug)`
-- `get_photos(album)`
-- `get_photo_by_album_and_id(album, photo_id)`
-- `get_tags`
+
+### Photo(s)
+
+- `get_photos_by_album_id(id)`
+- `get_photo_by_album_id_and_photo_id(album_id, photo_id)`
+
+### Tags
+
+- `get_all_tags`
 
 Domain Objects
 --------------
@@ -61,7 +69,6 @@ TODO...
 
 ### Tags
 
-- List all tags
 - List tags by album
 - List tags by photo
 - Search photos using tags

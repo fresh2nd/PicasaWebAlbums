@@ -8,7 +8,7 @@ module PicasaWebAlbums
     context "get all tags" do
       repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
       should "return at least 1 tag" do
-        tags = repo.get_tags
+        tags = repo.get_all_tags
         assert tags.count > 0
       end
     end

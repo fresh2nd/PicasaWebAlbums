@@ -8,7 +8,7 @@ module PicasaWebAlbums
     context "get all albums" do
       repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
       should "return albums" do
-        albums = repo.get_albums
+        albums = repo.get_all_albums
         assert_equal 4, albums.count
       end
     end
