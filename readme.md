@@ -16,6 +16,7 @@ Example
 	picasa_repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
 	albums = picasa_repo.get_albums
 	photos = picasa_repo.get_photos(albums[0])
+	photos.each { |photo| puts photo.url }
 
 Repsository Methods
 -------------------
