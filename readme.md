@@ -8,7 +8,7 @@ Integration
 
 Add this line to the application's Gemfile:
 
-	gem 'googleapis', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'
+	gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'
 
 Example
 -------
