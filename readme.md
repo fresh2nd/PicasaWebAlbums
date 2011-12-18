@@ -92,4 +92,9 @@ Domain Object Properties
 Additional Documentation
 ------------------------
 
-Additional documentation can be found on the [rubydoc pages](http://rubydoc.info/gems/picasawebalbums).
+Additional documentation can be found on the [rubydoc pages](http://rubydoc.info/gems/picasawebalbums)
+
+Feature Requests and Bugs
+-------------------------
+
+Please feel free to log any bugs or feature requests in the [Issues tab on Github](https://github.com/mkraft/PicasaWebAlbums/issues). Thank you.
