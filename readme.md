@@ -24,7 +24,7 @@ Code Examples
 Print the title of all albums
 
 	repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
-	albums = repo.get_albums
+	albums = repo.get_all_albums
 	albums.each { |album| puts album.title }
 
 Print the URL of each photo in the album titled "Big Boy"
