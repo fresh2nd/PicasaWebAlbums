@@ -24,22 +24,19 @@ module PicasaWebAlbums
 
     def get_album_by_id(id)
       albums = get_all_albums
-      index_of_album_with_id = albums.find_index{|album| album.id == id.to_s}
-      album_to_return = albums[index_of_album_with_id]
+      album_to_return = albums[albums.find_index{|album| album.id == id.to_s}]
       return album_to_return
     end
 
     def get_album_by_title(title)
       albums = get_all_albums
-      index_of_album_with_title = albums.find_index{|album| album.title == title.to_s}
-      album_to_return = albums[index_of_album_with_title]
+      album_to_return = albums[albums.find_index{|album| album.title == title.to_s}]
       return album_to_return
     end
 
     def get_album_by_slug(slug)
       albums = get_all_albums
-      index_of_album_with_slug = albums.find_index{|album| album.slug == slug.to_s}
-      album_to_return = albums[index_of_album_with_slug]
+      album_to_return = albums[albums.find_index{|album| album.slug == slug.to_s}]
       return album_to_return
     end
 
@@ -64,8 +61,8 @@ module PicasaWebAlbums
       photo_to_return = Photo.new
       photos.each do |photo|
         if photo.id == photo_id
-        photo_to_return = photo
-      end
+          photo_to_return = photo
+        end
       end
       return photo_to_return
     end
@@ -98,8 +95,7 @@ module PicasaWebAlbums
       response = Net::HTTP.start(uri.hostname, uri.port) { |http|
         http.request(request)
       }
-      body = response.body
-      xml = REXML::Document.new(body)
+      xml = REXML::Document.new(response.body)
       return xml
     end
 
@@ -112,16 +108,15 @@ module PicasaWebAlbums
     end
 
     def get_authentication_token(email, password)
-      body = ""
       uri = URI("https://www.google.com/accounts/ClientLogin")
-      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do   |http|
+      Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
         request = Net::HTTP::Post.new uri.request_uri
         data = "accountType=HOSTED_OR_GOOGLE&Email=#{email}&Passwd=#{password}&service=lh2&source=someapp1"
         response = http.request(request, data)
-        body = response.body
+        @body = response.body
       end
-      start_index = body.index('Auth=')
-      slice_of_auth_to_end = body[start_index..-1]
+      start_index = @body.index('Auth=')
+      slice_of_auth_to_end = @body[start_index..-1]
       end_index = slice_of_auth_to_end.index("\n")
       auth_string = slice_of_auth_to_end[0...end_index]
       auth_token = "GoogleLogin #{auth_string}"
