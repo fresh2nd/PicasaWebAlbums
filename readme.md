@@ -18,7 +18,7 @@ Example
 	photos = picasa_repo.get_photos(albums[0])
 	photos.each { |photo| puts photo.url }
 
-Repsository Methods
+Repository Methods
 -------------------
 
 ### Album(s)
