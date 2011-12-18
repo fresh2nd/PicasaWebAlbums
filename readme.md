@@ -13,8 +13,8 @@ Rails/Application Integration
 
 Add one of the below lines to the Gemfile:
 
-- `gem 'picasawebalbums'` (to install it from rubygems)
-- `gem 'picasawebalbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'` (to install directly from the git repo)
+- `gem 'picasawebalbums'`, or
+- `gem 'picasawebalbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'`
 
 Then run `bundle install`
 
