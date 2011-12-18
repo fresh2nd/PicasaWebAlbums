@@ -28,6 +28,14 @@ module PicasaWebAlbums
         assert tags.count > 0
       end
     end
+    
+    context "get photos by tags" do
+      should "return at least 1 photo" do
+        repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
+        photos = repo.get_photos_by_tags(['penny'])
+        assert photos.count > 0
+      end
+    end
   
   end
 end

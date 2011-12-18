@@ -34,6 +34,12 @@ Print the URL of each photo in the album titled "Big Boy"
 	photos = repo.get_photos_by_album_id(album.id)
 	photos.each { |photo| puts photo.url }
 
+Get photos by tag
+
+	repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
+	photos = repo.get_photos_by_tags(['cat', 'dog'])
+	# returns photos tagged with 'cat' AND 'dog'
+
 Repository Methods
 -------------------
 
@@ -48,6 +54,7 @@ Repository Methods
 
 - `get_photos_by_album_id(album_id)`
 - `get_photo_by_album_id_and_photo_id(album_id, photo_id)`
+- `get_photos_by_tags(tags_array)`
 
 ### Tags
 

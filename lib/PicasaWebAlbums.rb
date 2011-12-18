@@ -2,6 +2,7 @@
 require 'net/http'
 require 'rexml/document'
 require 'date'
+require 'uri'
 require_relative 'album'
 require_relative 'photo'
 require_relative 'tag'

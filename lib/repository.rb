@@ -67,6 +67,23 @@ module PicasaWebAlbums
       return photo_to_return
     end
     
+    def get_photos_by_tags(tags)
+      url = "http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=photo&tag=#{get_tags_string(tags)}"
+      xml = get_xml(url)
+      photos = []
+      xml.root.elements.each("//entry") do |entry|
+        photo = Photo.new
+        photo.id = entry.elements["gphoto:id"].text
+        photo.url = entry.elements["media:group/media:content"].attributes["url"]
+        photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
+        photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
+        photo.caption = entry.elements["media:group/media:description"].text
+        photo.file_name = entry.elements["media:group/media:title"].text
+        photos << photo
+      end
+      return photos
+    end
+    
     def get_all_tags
       xml = get_xml("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=tag")
       tags = []
@@ -87,6 +104,15 @@ module PicasaWebAlbums
     end
 
     private
+    
+    def get_tags_string(tags)
+      tags_string = ""
+      tags.each do |tag|
+        tags_string += URI.escape(tag.strip)
+        tags_string += '%2C' unless tag == tags.last
+      end
+      return tags_string
+    end
     
     def get_xml(url)
       uri = URI(url)
