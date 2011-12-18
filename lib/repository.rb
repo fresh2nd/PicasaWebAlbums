@@ -81,12 +81,12 @@ module PicasaWebAlbums
       return tags
     end
     
-    def get_tags_by_album_id(album)
-      xml = get_album_tags_xml
+    def get_tags_by_album_id(album_id)
+      xml = get_xml("http://picasaweb.google.com/data/feed/api/user/userID/albumid/#{album_id}?kind=tag")
     end
     
-    def get_tags_by_photo_id(photo)
-      xml = get_photo_tags_xml
+    def get_tags_by_album_id_and_photo_id(album_id, photo_id)
+      xml = get_xml("http://picasaweb.google.com/data/feed/api/user/default/albumid/#{album_id}/photoid/#{photo_id}?kind=tag")
     end
 
     private
