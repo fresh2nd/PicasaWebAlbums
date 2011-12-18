@@ -66,15 +66,3 @@ Domain Objects
 ### Tag
 
 - `text`
-
-Future Development
-------------------
-
-### Tags
-
-- Search photos using tags
-
-### Comments
-
-- Retrieve the most recent comments
-- Retrieve the comments for a photo
