@@ -71,8 +71,6 @@ TODO...
 
 ### Tags
 
-- List tags by album
-- List tags by photo
 - Search photos using tags
 
 ### Comments
