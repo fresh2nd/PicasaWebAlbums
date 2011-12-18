@@ -6,7 +6,7 @@ module PicasaWebAlbums
     end
 
     def get_all_albums
-      xml = get_multiple_album_xml
+      xml = get_xml("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=album&access=all")
       albums = []
       xml.root.elements.each("//entry") do |entry|
         gallery = Album.new
@@ -44,7 +44,7 @@ module PicasaWebAlbums
     end
 
     def get_photos_by_album_id(id)
-      xml = get_single_album_xml(id)
+      xml = get_xml("http://picasaweb.google.com/data/feed/base/user/#{@email}/albumid/#{id}")
       photos = []
       xml.root.elements.each("//entry") do |entry|
         photo = Photo.new
@@ -71,7 +71,7 @@ module PicasaWebAlbums
     end
     
     def get_all_tags
-      xml = get_tags_xml
+      xml = get_xml("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=tag")
       tags = []
       xml.root.elements.each("//entry") do |entry|
         tag = Tag.new
@@ -82,19 +82,21 @@ module PicasaWebAlbums
     end
     
     def get_tags_by_album_id(album)
+      xml = get_album_tags_xml
     end
     
     def get_tags_by_photo_id(photo)
+      xml = get_photo_tags_xml
     end
 
     private
-
-    def get_tags_xml
-      uri = URI("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=tag")
+    
+    def get_xml(url)
+      uri = URI(url)
       request = Net::HTTP::Get.new(uri.request_uri)
       request['Authorization'] = @authentication_token
       response = Net::HTTP.start(uri.hostname, uri.port) { |http|
-      http.request(request)
+        http.request(request)
       }
       body = response.body
       xml = REXML::Document.new(body)
@@ -124,30 +126,6 @@ module PicasaWebAlbums
       auth_string = slice_of_auth_to_end[0...end_index]
       auth_token = "GoogleLogin #{auth_string}"
       return auth_token
-    end
-
-    def get_multiple_album_xml
-      uri = URI("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=album&access=all")
-      request = Net::HTTP::Get.new(uri.request_uri)
-      request['Authorization'] = @authentication_token
-      response = Net::HTTP.start(uri.hostname, uri.port) { |http|
-      http.request(request)
-      }
-      body = response.body
-      xml = REXML::Document.new(body)
-      return xml
-    end
-
-    def get_single_album_xml(album_id)
-      uri = URI("http://picasaweb.google.com/data/feed/base/user/#{@email}/albumid/#{album_id}")
-      request = Net::HTTP::Get.new(uri.request_uri)
-      request['Authorization'] = @authentication_token
-      response = Net::HTTP.start(uri.hostname, uri.port) { |http|
-      http.request(request)
-      }
-      body = response.body
-      xml = REXML::Document.new(body)
-      return xml
     end
   end
 end

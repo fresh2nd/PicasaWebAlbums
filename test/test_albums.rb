@@ -16,7 +16,7 @@ module PicasaWebAlbums
     context "get album by id" do
       repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
       should "return an album" do
-       album = repo.get_album_by_id(5461230096110151249)
+       album = repo.get_album_by_id("5461230096110151249")
        assert_equal "Banner Images", album.title
       end
     end

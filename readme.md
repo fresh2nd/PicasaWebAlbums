@@ -30,12 +30,14 @@ Repsository Methods
 
 ### Photo(s)
 
-- `get_photos_by_album_id(id)`
+- `get_photos_by_album_id(album_id)`
 - `get_photo_by_album_id_and_photo_id(album_id, photo_id)`
 
 ### Tags
 
 - `get_all_tags`
+- `get_tags_by_album_id(album_id)`
+- `get_tags_by_photo_id(photo_id)`
 
 Domain Objects
 --------------
