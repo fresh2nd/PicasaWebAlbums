@@ -6,15 +6,15 @@ Gem for accessing photos and albums from Picasa Web Albums
 Installation
 ------------
 
-	gem install PicasaWebAlbums
+	gem install picasawebalbums
 	
 Rails/Application Integration
 -----------------------------
 
 Add one of the below lines to the Gemfile:
 
-- `gem 'PicasaWebAlbums'` (to install it from rubygems)
-- `gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'` (to install directly from the git repo)
+- `gem 'picasawebalbums'` (to install it from rubygems)
+- `gem 'picasawebalbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'` (to install directly from the git repo)
 
 Then run `bundle install`
 
@@ -85,4 +85,4 @@ Domain Object Properties
 Additional Documentation
 ------------------------
 
-Additional documentation can be found on the [rubydoc pages](http://rubydoc.info/gems/PicasaWebAlbums).
+Additional documentation can be found on the [rubydoc pages](http://rubydoc.info/gems/picasawebalbums).
