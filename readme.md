@@ -8,9 +8,8 @@ Integration
 
 Add one of the below lines to the application's Gemfile:
 
-- `gem 'PicasaWebAlbums'`
-or
-- `gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'`
+- `gem 'PicasaWebAlbums'` (to install it from rubygems)
+- `gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'` (to install directly from the git repo)
 
 Example
 -------
