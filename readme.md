@@ -6,9 +6,11 @@ Gem for accessing photos and albums from Picasa Web Albums
 Integration
 -----------
 
-Add this line to the application's Gemfile:
+Add one of the below lines to the application's Gemfile:
 
-	gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'
+- `gem 'PicasaWebAlbums'`
+or
+- `gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'`
 
 Example
 -------
