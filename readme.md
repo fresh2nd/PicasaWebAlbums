@@ -3,20 +3,35 @@ PicasaWebAlbums
 
 Gem for accessing photos and albums from Picasa Web Albums
 
-Integration
------------
+Installation
+------------
 
-Add one of the below lines to the application's Gemfile:
+	gem install PicasaWebAlbums
+	
+Rails/Application Integration
+-----------------------------
+
+Add one of the below lines to the Gemfile:
 
 - `gem 'PicasaWebAlbums'` (to install it from rubygems)
 - `gem 'PicasaWebAlbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'` (to install directly from the git repo)
 
-Example
--------
+Then run `bundle install`
 
-	picasa_repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
-	albums = picasa_repo.get_albums
-	photos = picasa_repo.get_photos(albums[0])
+Code Examples
+-------------
+
+Print the title of all albums
+
+	repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
+	albums = repo.get_albums
+	albums.each { |album| puts album.title }
+
+Print the URL of each photo in the album titled "Big Boy"
+
+	repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
+	album = repo.get_album_by_title("Big Boy")
+	photos = repo.get_photos_by_album_id(album.id)
 	photos.each { |photo| puts photo.url }
 
 Repository Methods
@@ -40,8 +55,8 @@ Repository Methods
 - `get_tags_by_album_id(album_id)`
 - `get_tags_by_album_id_and_photo_id(album_id, photo_id)`
 
-Domain Objects
---------------
+Domain Object Properties
+------------------------
 
 ### Photo
 
@@ -66,3 +81,8 @@ Domain Objects
 ### Tag
 
 - `text`
+
+Additional Documentation
+------------------------
+
+Additional documentation can be found on the [rubydoc pages](http://rubydoc.info/gems/PicasaWebAlbums).
