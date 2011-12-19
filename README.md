@@ -97,4 +97,15 @@ Additional documentation can be found on the [rubydoc pages](http://rubydoc.info
 Feature Requests and Bugs
 -------------------------
 
-Please feel free to log any bugs or feature requests in the [Issues tab on Github](https://github.com/mkraft/PicasaWebAlbums/issues). Thank you.
+Please feel free to log any bugs or feature requests in the [Issues tab on Github](https://github.com/mkraft/PicasaWebAlbums/issues).
+
+Coming Down the Pike
+--------------------
+
+The goal is to completely mirror all of the Picasa Web Albums API features including
+
+- Create, update, delete albums
+- CUD photos
+- CUD tags
+- CRUD comments
+- CRUD geolocation data
