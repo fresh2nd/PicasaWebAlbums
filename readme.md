@@ -13,7 +13,7 @@ Rails/Application Integration
 
 Add one of the below lines to the Gemfile:
 
-- `gem 'picasawebalbums'`, or
+- `gem 'picasawebalbums`, or
 - `gem 'picasawebalbums', :git => 'git@github.com:mkraft/PicasaWebAlbums.git'`
 
 Then run `bundle install`
@@ -41,7 +41,7 @@ Get photos with specific tags
 	# returns photos tagged with 'cat' AND 'dog'
 
 Repository Methods
--------------------
+------------------
 
 ### Album(s)
 
