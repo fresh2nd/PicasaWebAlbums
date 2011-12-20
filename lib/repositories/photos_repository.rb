@@ -5,13 +5,7 @@ module PhotosRepository
     xml = get_xml("http://picasaweb.google.com/data/feed/base/user/#{@email}/albumid/#{id}")
     photos = []
     xml.root.elements.each("//entry") do |entry|
-      photo = PicasaWebAlbums::Photo.new
-      photo.id = get_photo_id_from_photo_id_url(entry.elements["id"].text)
-      photo.url = entry.elements["media:group/media:content"].attributes["url"]
-      photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
-      photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
-      photo.caption = entry.elements["media:group/media:description"].text
-      photo.file_name = entry.elements["media:group/media:title"].text
+      photo = get_photo_from_xml_element(entry)
       photos << photo
     end
     return photos
@@ -33,19 +27,28 @@ module PhotosRepository
     xml = get_xml(url)
     photos = []
     xml.root.elements.each("//entry") do |entry|
-      photo = PicasaWebAlbums::Photo.new
-      photo.id = entry.elements["gphoto:id"].text
-      photo.url = entry.elements["media:group/media:content"].attributes["url"]
-      photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
-      photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
-      photo.caption = entry.elements["media:group/media:description"].text
-      photo.file_name = entry.elements["media:group/media:title"].text
+      photo = get_photo_from_xml_element(entry)
       photos << photo
     end
     return photos
   end
   
   private
+  
+  def get_photo_from_xml_element(entry)
+    photo = PicasaWebAlbums::Photo.new
+    if (entry.elements["gphoto:id"] != nil && entry.elements["gphoto:id"].text != "")
+      photo.id = entry.elements["gphoto:id"].text
+    else
+      photo.id = get_photo_id_from_photo_id_url(entry.elements["id"].text)
+    end
+    photo.url = entry.elements["media:group/media:content"].attributes["url"]
+    photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
+    photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
+    photo.caption = entry.elements["media:group/media:description"].text
+    photo.file_name = entry.elements["media:group/media:title"].text
+    return photo
+  end
   
   def get_tags_string(tags)
     tags_string = ""
