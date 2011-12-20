@@ -18,8 +18,8 @@ Add one of the below lines to the Gemfile:
 
 Then run `bundle install`
 
-Code Examples
--------------
+Usage
+-----
 
 Print the title of all albums
 
@@ -40,8 +40,8 @@ Get photos with specific tags
 	photos = repo.get_photos_by_tags(['cat', 'dog'])
 	# returns photos tagged with 'cat' AND 'dog'
 
-Repository Methods
-------------------
+Methods
+-------
 
 ### Album(s)
 
