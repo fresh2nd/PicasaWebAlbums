@@ -12,6 +12,11 @@ module AlbumsRepository
       gallery.date_created = DateTime.parse(entry.elements["published"].text)
       gallery.date_updated = DateTime.parse(entry.elements["updated"].text)
       gallery.slug = entry.elements["gphoto:name"].text
+      gallery.access = entry.elements["gphoto:access"].text
+      gallery.number_of_photos = entry.elements["gphoto:numphotos"].text.to_i
+      gallery.number_of_comments = entry.elements["gphoto:commentCount"].text.to_i
+      gallery.number_of_photos_remaining = entry.elements["gphoto:numphotosremaining"].text.to_i
+      gallery.total_bytes = entry.elements["gphoto:bytesUsed"].text.to_i
       gallery.cover_photo_url = entry.elements["media:group/media:content"].attributes["url"]
       gallery.description = entry.elements["media:group/media:description"].text
       albums << gallery

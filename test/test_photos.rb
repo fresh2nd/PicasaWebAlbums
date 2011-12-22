@@ -21,7 +21,7 @@ module PicasaWebAlbums
     end
   
     def test_get_photos_by_tags
-      photos = @repo.get_photos_by_tags(['penny'])
+      photos = @repo.get_photos_by_tags(['leonard'])
       assert photos.count > 0
     end
   
