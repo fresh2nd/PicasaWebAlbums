@@ -50,6 +50,7 @@ Methods
 - `get_album_by_title(title)`
 - `get_album_by_slug(slug)`
 - `create_album(album)`
+- `delete_album_by_id(album_id)`
 
 ### Photo(s)
 
@@ -110,9 +111,9 @@ Coming Down the Pike
 
 The goal is to completely mirror all of the Picasa Web Albums API features including
 
-- UD albums
-- CUD photos
-- CUD tags
+- Update albums
+- Create, Update, Delete photos
+- Create, Update, Delete tags
 - CRUD comments
 - CRUD geolocation data
 
