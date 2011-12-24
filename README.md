@@ -110,7 +110,7 @@ Coming Down the Pike
 
 The goal is to completely mirror all of the Picasa Web Albums API features including
 
-- Create, update, delete albums
+- UD albums
 - CUD photos
 - CUD tags
 - CRUD comments
