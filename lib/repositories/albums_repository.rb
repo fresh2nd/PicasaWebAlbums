@@ -19,6 +19,7 @@ module AlbumsRepository
       gallery.total_bytes = entry.elements["gphoto:bytesUsed"].text.to_i
       gallery.cover_photo_url = entry.elements["media:group/media:content"].attributes["url"]
       gallery.description = entry.elements["media:group/media:description"].text
+      gallery.edit_url = get_edit_url_from_entry(entry)
       albums << gallery
     end
     return albums
@@ -47,18 +48,29 @@ module AlbumsRepository
     post_new_album(entry)
   end
   
-  #def delete_album_by_id(album_id)
-  #  url = URI.parse("https://picasaweb.google.com/data/entry/api/user/#{@email}/albumid/#{album_id}")
-  #  http = Net::HTTP.new(url.host, url.port)
-  #  http.use_ssl = (url.scheme == 'https')
-  #  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-  #  req = Net::HTTP::Delete.new(url.request_uri)
-  #  req['Authorization'] = @authentication_token
-  #  res = http.request(req)
-  #  return res.code
-  #end
+  def delete_album_by_id(album_id)
+    album = get_album_by_id(album_id)
+    url = URI.parse(album.edit_url)
+    http = Net::HTTP.new(url.host, url.port)
+    http.use_ssl = (url.scheme == 'https')
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    req = Net::HTTP::Delete.new(url.request_uri)
+    req['Authorization'] = @authentication_token
+    res = http.request(req)
+    return res.code
+  end
   
   private
+  
+  def get_edit_url_from_entry(entry)
+    href = ""
+    entry.elements.each("link") do |link|
+      if (link.attributes["rel"] == "edit")
+        href = link.attributes["href"]
+      end
+    end
+    return href
+  end
   
   def post_new_album(data)
     uri = URI("https://picasaweb.google.com/data/feed/api/user/#{@email}")

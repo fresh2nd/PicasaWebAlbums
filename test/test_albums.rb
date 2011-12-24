@@ -10,7 +10,7 @@ module PicasaWebAlbums
   
     def test_get_all_albums
       albums = @repo.get_all_albums
-      assert_equal 4, albums.count
+      assert_equal 3, albums.count
     end
     
     def test_get_album_by_id
@@ -20,7 +20,7 @@ module PicasaWebAlbums
 
     def test_get_album_by_title
       album = @repo.get_album_by_title("Bio Profile Pics")
-      assert_equal "5455332611886090353", album.id
+      assert_equal "5689734429356072049", album.id
     end
   
     def test_get_album_by_slug
@@ -28,20 +28,23 @@ module PicasaWebAlbums
       assert_equal "5577380987485671713", album.id
     end
     
-    #def test_create_new_album
-    #  album = Album.new
-    #  album.title = "Programmatic album title"
-    #  album.description = "This is my programmatic album description!"
-    #  album.access = "private"
-    #  status_code = @repo.create_album(album)
-    #  assert_equal "201", status_code
-    #end
+    def test_create_new_album
+      album = Album.new
+      album.title = "Programmatic album title"
+      album.description = "This is my programmatic album description!"
+      album.access = "private"
+      status_code = @repo.create_album(album)
+      assert_equal "201", status_code
+      delete_album
+    end
     
-    #def test_delete_album
-    #  album = @repo.get_album_by_title("Programmatic album title")
-    #  status_code = @repo.delete_album_by_id(album.id)
-    #  assert_equal "201", status_code
-    #end
+    def delete_album
+      album = @repo.get_album_by_title("Programmatic album title")
+      if (album != nil)
+        status_code = @repo.delete_album_by_id(album.id)
+        assert_equal "200", status_code
+      end
+    end
     
   end
 end
