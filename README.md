@@ -49,6 +49,7 @@ Methods
 - `get_album_by_id(id)`
 - `get_album_by_title(title)`
 - `get_album_by_slug(slug)`
+- `create_album(album)`
 
 ### Photo(s)
 

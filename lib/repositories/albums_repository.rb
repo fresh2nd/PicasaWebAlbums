@@ -41,4 +41,36 @@ module AlbumsRepository
     album_to_return = albums[albums.find_index{|album| album.slug == slug.to_s}]
     return album_to_return
   end
+  
+  def create_album(album)
+    entry = "<entry xmlns='http://www.w3.org/2005/Atom' xmlns:media='http://search.yahoo.com/mrss/' xmlns:gphoto='http://schemas.google.com/photos/2007'><title type='text'>#{album.title}</title><summary type='text'>#{album.description}</summary><gphoto:location></gphoto:location><gphoto:access>#{album.access}</gphoto:access><gphoto:timestamp></gphoto:timestamp><media:group><media:keywords></media:keywords></media:group><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/photos/2007#album'></category></entry>"
+    post_new_album(entry)
+  end
+  
+  #def delete_album_by_id(album_id)
+  #  url = URI.parse("https://picasaweb.google.com/data/entry/api/user/#{@email}/albumid/#{album_id}")
+  #  http = Net::HTTP.new(url.host, url.port)
+  #  http.use_ssl = (url.scheme == 'https')
+  #  http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+  #  req = Net::HTTP::Delete.new(url.request_uri)
+  #  req['Authorization'] = @authentication_token
+  #  res = http.request(req)
+  #  return res.code
+  #end
+  
+  private
+  
+  def post_new_album(data)
+    uri = URI("https://picasaweb.google.com/data/feed/api/user/#{@email}")
+    status = ""
+    Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+      request = Net::HTTP::Post.new uri.request_uri
+      request['Authorization'] = @authentication_token
+      request['Content-Type'] = "application/atom+xml; charset=UTF-8; type=entry"
+      request.body = data
+      response = http.request(request)
+      status = response.code
+    end
+    return status
+  end
 end

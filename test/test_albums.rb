@@ -28,5 +28,20 @@ module PicasaWebAlbums
       assert_equal "5577380987485671713", album.id
     end
     
+    #def test_create_new_album
+    #  album = Album.new
+    #  album.title = "Programmatic album title"
+    #  album.description = "This is my programmatic album description!"
+    #  album.access = "private"
+    #  status_code = @repo.create_album(album)
+    #  assert_equal "201", status_code
+    #end
+    
+    #def test_delete_album
+    #  album = @repo.get_album_by_title("Programmatic album title")
+    #  status_code = @repo.delete_album_by_id(album.id)
+    #  assert_equal "201", status_code
+    #end
+    
   end
 end
