@@ -39,6 +39,8 @@ Get photos with specific tags
 	repo = PicasaWebAlbums.get_repository('someperson@gmail.com', 'somepassword')
 	photos = repo.get_photos_by_tags(['cat', 'dog'])
 	# returns photos tagged with 'cat' AND 'dog'
+	
+To test the library with a Picasa Web Albums account, replace the values in /test/config/test_account.yml with the known values from the account.
 
 Methods
 -------
