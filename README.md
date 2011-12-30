@@ -43,7 +43,7 @@ Get photos with specific tags
 Testing
 -------
 
-To test the library with a Picasa Web Albums account, replace the values in `/test/config/test_account.yml` with the known values from the account. The album can be any album in the account (no changes will be made to it). The photo must be in the chose test album. Run:
+To run integration tests, replace the values in `/test/config/test_account.yml` with known values from a real Picasa Web Albums account. The `album` can be any album in the account (no changes will be made to it). The `photo` must be from the chosen `album`. Run:
 
 	ruby test/tests.rb
 
