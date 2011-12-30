@@ -7,7 +7,7 @@ module PicasaWebAlbums
     
     def setup
       @test_account = YAML::load(File.open(File.expand_path('test/config/test_account.yml')))
-      @repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
+      @repo = PicasaWebAlbums.get_repository(@test_account["email"], @test_account["password"])
     end
     
     def test_get_all_tags
