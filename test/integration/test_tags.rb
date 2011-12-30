@@ -1,11 +1,12 @@
 require 'test/unit'
 require 'shoulda'
-require_relative '../lib/picasawebalbums'
+require_relative '../../lib/picasawebalbums'
 
 module PicasaWebAlbums
   class TestTags < Test::Unit::TestCase
     
     def setup
+      @test_account = YAML::load(File.open(File.expand_path('test/config/test_account.yml')))
       @repo = PicasaWebAlbums.get_repository('apitest33@gmail.com', 'ruhak23A')
     end
     

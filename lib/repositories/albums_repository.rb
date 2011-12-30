@@ -43,9 +43,9 @@ module AlbumsRepository
     return album_to_return
   end
   
-  def create_album(album)
-    entry = "<entry xmlns='http://www.w3.org/2005/Atom' xmlns:media='http://search.yahoo.com/mrss/' xmlns:gphoto='http://schemas.google.com/photos/2007'><title type='text'>#{album.title}</title><summary type='text'>#{album.description}</summary><gphoto:location></gphoto:location><gphoto:access>#{album.access}</gphoto:access><gphoto:timestamp></gphoto:timestamp><media:group><media:keywords></media:keywords></media:group><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/photos/2007#album'></category></entry>"
-    post_new_album(entry)
+  def create_album(new_album)
+    atom = get_album_atom(new_album)
+    post_new_album(atom)
   end
   
   def delete_album_by_id(album_id)
@@ -60,7 +60,26 @@ module AlbumsRepository
     return res.code
   end
   
+  #def update_album(modified_album)
+  #  atom = get_album_atom(modified_album)
+  #  uri = URI(modified_album.edit_url)
+  #  status = ""
+  #  Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+  #    request = Net::HTTP::Put.new uri.request_uri
+  #    request['Authorization'] = @authentication_token
+  #    request['Content-Type'] = "application/atom+xml; charset=UTF-8; type=entry"
+  #    request.body = atom
+  #    response = http.request(request)
+  #    status = response.code
+  #  end
+  #  return status
+  #end
+  
   private
+  
+  def get_album_atom(album)
+    return "<entry xmlns='http://www.w3.org/2005/Atom' xmlns:media='http://search.yahoo.com/mrss/' xmlns:gphoto='http://schemas.google.com/photos/2007'><title type='text'>#{album.title}</title><summary type='text'>#{album.description}</summary><gphoto:location></gphoto:location><gphoto:access>#{album.access}</gphoto:access><gphoto:timestamp></gphoto:timestamp><media:group><media:keywords></media:keywords></media:group><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/photos/2007#album'></category></entry>"
+  end
   
   def get_edit_url_from_entry(entry)
     href = ""
