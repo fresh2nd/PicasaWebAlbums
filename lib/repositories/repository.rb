@@ -22,9 +22,7 @@ module PicasaWebAlbums
       uri = URI(url)
       request = Net::HTTP::Get.new(uri.request_uri)
       request['Authorization'] = @authentication_token
-      response = Net::HTTP.start(uri.hostname, uri.port) { |http|
-        http.request(request)
-      }
+      response = Net::HTTP.start(uri.hostname, uri.port) { |http| http.request(request) }
       REXML::Document.new(response.body)
     end
 

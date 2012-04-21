@@ -42,11 +42,6 @@ module PhotosRepository
     else
       photo.id = get_photo_id_from_photo_id_url(entry.elements["id"].text)
     end
-    # TODO: Request that google put the size in the feed that retrieves photos by album id
-    # so that retrieving by tag isn't the only way to get the photo size.
-    #if (entry.elements["gphoto:size"] != nil && entry.elements["gphoto:size"].text != "")
-    #  photo.bytes = entry.elements["gphoto:size"].text.to_i
-    #end
     photo.url = entry.elements["media:group/media:content"].attributes["url"]
     photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
     photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
