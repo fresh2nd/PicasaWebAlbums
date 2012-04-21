@@ -25,8 +25,7 @@ module PicasaWebAlbums
       response = Net::HTTP.start(uri.hostname, uri.port) { |http|
         http.request(request)
       }
-      xml = REXML::Document.new(response.body)
-      return xml
+      REXML::Document.new(response.body)
     end
 
     def get_authentication_token(email, password)
@@ -42,8 +41,7 @@ module PicasaWebAlbums
       slice_of_auth_to_end = body[start_index..-1]
       end_index = slice_of_auth_to_end.index("\n")
       auth_string = slice_of_auth_to_end[0...end_index]
-      auth_token = "GoogleLogin #{auth_string}"
-      return auth_token
+      "GoogleLogin #{auth_string}"
     end
   end
 end

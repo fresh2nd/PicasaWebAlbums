@@ -1,5 +1,4 @@
 require 'test/unit'
-require 'shoulda'
 require_relative '../../lib/picasawebalbums'
 
 module PicasaWebAlbums

@@ -22,25 +22,22 @@ module AlbumsRepository
       gallery.edit_url = get_edit_url_from_entry(entry)
       albums << gallery
     end
-    return albums
+    albums
   end
 
   def get_album_by_id(id)
     albums = get_all_albums
-    album_to_return = albums[albums.find_index{|album| album.id == id.to_s}]
-    return album_to_return
+    albums[albums.find_index{|album| album.id == id.to_s}]
   end
 
   def get_album_by_title(title)
     albums = get_all_albums
-    album_to_return = albums[albums.find_index{|album| album.title == title.to_s}]
-    return album_to_return
+    albums[albums.find_index{|album| album.title == title.to_s}]
   end
 
   def get_album_by_slug(slug)
     albums = get_all_albums
-    album_to_return = albums[albums.find_index{|album| album.slug == slug.to_s}]
-    return album_to_return
+    albums[albums.find_index{|album| album.slug == slug.to_s}]
   end
   
   def create_album(new_album)
@@ -57,7 +54,7 @@ module AlbumsRepository
     req = Net::HTTP::Delete.new(url.request_uri)
     req['Authorization'] = @authentication_token
     res = http.request(req)
-    return res.code
+    res.code
   end
   
   #def update_album(modified_album)
@@ -88,7 +85,7 @@ module AlbumsRepository
         href = link.attributes["href"]
       end
     end
-    return href
+    href
   end
   
   def post_new_album(data)
@@ -102,6 +99,6 @@ module AlbumsRepository
       response = http.request(request)
       status = response.code
     end
-    return status
+    status
   end
 end

@@ -8,7 +8,7 @@ module PhotosRepository
       photo = get_photo_from_xml_element(entry)
       photos << photo
     end
-    return photos
+    photos
   end
 
   def get_photo_by_album_id_and_photo_id(album_id, photo_id)
@@ -19,7 +19,7 @@ module PhotosRepository
         photo_to_return = photo
       end
     end
-    return photo_to_return
+    photo_to_return
   end
   
   def get_photos_by_tags(tags)
@@ -30,7 +30,7 @@ module PhotosRepository
       photo = get_photo_from_xml_element(entry)
       photos << photo
     end
-    return photos
+    photos
   end
   
   private
@@ -52,7 +52,7 @@ module PhotosRepository
     photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
     photo.caption = entry.elements["media:group/media:description"].text
     photo.file_name = entry.elements["media:group/media:title"].text
-    return photo
+    photo
   end
   
   def get_tags_string(tags)
@@ -61,14 +61,13 @@ module PhotosRepository
       tags_string += URI.escape(tag.strip)
       tags_string += '%2C' unless tag == tags.last
     end
-    return tags_string
+    tags_string
   end
   
   def get_photo_id_from_photo_id_url(photo_id_url)
     start_index = photo_id_url.index('/photoid/') + 9
     slice_of_id_url_to_end = photo_id_url[start_index..-1]
     end_index = slice_of_id_url_to_end.index(/[?|\/]/)
-    id = slice_of_id_url_to_end[0...end_index]
-    return id
+    slice_of_id_url_to_end[0...end_index]
   end
 end
