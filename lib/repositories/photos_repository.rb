@@ -37,17 +37,21 @@ module PhotosRepository
   
   def get_photo_from_xml_element(entry)
     photo = PicasaWebAlbums::Photo.new
-    if (entry.elements["gphoto:id"] != nil && entry.elements["gphoto:id"].text != "")
-      photo.id = entry.elements["gphoto:id"].text
-    else
-      photo.id = get_photo_id_from_photo_id_url(entry.elements["id"].text)
-    end
+    photo.id = photo_id_from_entry(entry)
     photo.url = entry.elements["media:group/media:content"].attributes["url"]
     photo.width = entry.elements["media:group/media:content"].attributes["width"].to_i
     photo.height = entry.elements["media:group/media:content"].attributes["height"].to_i
     photo.caption = entry.elements["media:group/media:description"].text
     photo.file_name = entry.elements["media:group/media:title"].text
     photo
+  end
+
+  def photo_id_from_entry(entry)
+    if (entry.elements["gphoto:id"] != nil) && (entry.elements["gphoto:id"].text != "")
+      entry.elements["gphoto:id"].text
+    else
+      get_photo_id_from_photo_id_url(entry.elements["id"].text)
+    end
   end
   
   def get_tags_string(tags)

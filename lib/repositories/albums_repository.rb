@@ -4,25 +4,7 @@ require_relative '../domain/album'
 module AlbumsRepository
   def get_all_albums
     xml = get_xml("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=album&access=all")
-    albums = []
-    xml.root.elements.each("//entry") do |entry|
-      gallery = PicasaWebAlbums::Album.new
-      gallery.id = entry.elements["gphoto:id"].text
-      gallery.title = entry.elements["title"].text
-      gallery.date_created = DateTime.parse(entry.elements["published"].text)
-      gallery.date_updated = DateTime.parse(entry.elements["updated"].text)
-      gallery.slug = entry.elements["gphoto:name"].text
-      gallery.access = entry.elements["gphoto:access"].text
-      gallery.number_of_photos = entry.elements["gphoto:numphotos"].text.to_i
-      gallery.number_of_comments = entry.elements["gphoto:commentCount"].text.to_i
-      gallery.number_of_photos_remaining = entry.elements["gphoto:numphotosremaining"].text.to_i
-      gallery.total_bytes = entry.elements["gphoto:bytesUsed"].text.to_i
-      gallery.cover_photo_url = entry.elements["media:group/media:content"].attributes["url"]
-      gallery.description = entry.elements["media:group/media:description"].text
-      gallery.edit_url = get_edit_url_from_entry(entry)
-      albums << gallery
-    end
-    albums
+    xml.root.elements.collect("//entry") { |entry| gallery_from_entry(entry) }
   end
 
   def get_album_by_id(id)
@@ -73,6 +55,24 @@ module AlbumsRepository
   #end
   
   private
+
+  def gallery_from_entry(entry)
+    gallery = PicasaWebAlbums::Album.new
+    gallery.id = entry.elements["gphoto:id"].text
+    gallery.title = entry.elements["title"].text
+    gallery.date_created = DateTime.parse(entry.elements["published"].text)
+    gallery.date_updated = DateTime.parse(entry.elements["updated"].text)
+    gallery.slug = entry.elements["gphoto:name"].text
+    gallery.access = entry.elements["gphoto:access"].text
+    gallery.number_of_photos = entry.elements["gphoto:numphotos"].text.to_i
+    gallery.number_of_comments = entry.elements["gphoto:commentCount"].text.to_i
+    gallery.number_of_photos_remaining = entry.elements["gphoto:numphotosremaining"].text.to_i
+    gallery.total_bytes = entry.elements["gphoto:bytesUsed"].text.to_i
+    gallery.cover_photo_url = entry.elements["media:group/media:content"].attributes["url"]
+    gallery.description = entry.elements["media:group/media:description"].text
+    gallery.edit_url = get_edit_url_from_entry(entry)
+    gallery
+  end
   
   def get_album_atom(album)
     return "<entry xmlns='http://www.w3.org/2005/Atom' xmlns:media='http://search.yahoo.com/mrss/' xmlns:gphoto='http://schemas.google.com/photos/2007'><title type='text'>#{album.title}</title><summary type='text'>#{album.description}</summary><gphoto:location></gphoto:location><gphoto:access>#{album.access}</gphoto:access><gphoto:timestamp></gphoto:timestamp><media:group><media:keywords></media:keywords></media:group><category scheme='http://schemas.google.com/g/2005#kind' term='http://schemas.google.com/photos/2007#album'></category></entry>"
