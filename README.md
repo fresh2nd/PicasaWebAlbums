@@ -1,7 +1,7 @@
+Adding field weight(times the tag is used) to the Tag Object.
+
 PicasaWebAlbums
 ===============
-
-Adding tags.weight(times the tag is used) to the Tag Object.
 
 
 Gem for accessing photos and albums from Picasa Web Albums
