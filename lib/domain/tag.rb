@@ -1,5 +1,5 @@
 module PicasaWebAlbums
   class Tag
-    attr_accessor :text
+    attr_accessor :text, :weight
   end
 end

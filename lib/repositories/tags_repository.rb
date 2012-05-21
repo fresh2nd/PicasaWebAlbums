@@ -7,7 +7,7 @@ module TagsRepository
     xml.root.elements.each("//entry") do |entry|
       tag = PicasaWebAlbums::Tag.new
       tag.text = entry.elements["title"].text
-      tag.weight = entry.elements["gphoto:weight"].text || "1" #Añadido campo nuevo a tags.
+      tag.weight = entry.elements["gphoto:weight"].text.to_i  #Adding new field to tag. Weight is the number of times that the tag is present.
       tags << tag
     end
     tags
