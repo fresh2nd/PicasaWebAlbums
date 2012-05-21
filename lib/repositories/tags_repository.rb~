@@ -4,10 +4,10 @@ module TagsRepository
   def get_all_tags
     xml = get_xml("http://picasaweb.google.com/data/feed/api/user/#{@email}?kind=tag")
     tags = []
-    xml.root.elements.each('//entry') do |entry|
+    xml.root.elements.each("//entry") do |entry|
       tag = PicasaWebAlbums::Tag.new
-      tag.text = entry.elements['title'].text
-      tag.weight = entry.elements['gphoto:weight'].present? ? entry.elements['gphoto:weight'].text.to_i : 1 # Adding weight (number of photos with this tag)
+      tag.text = entry.elements["title"].text
+      tag.weight = entry.elements["gphoto:weight"].text.to_i  #Adding new field to tag. Weight is the number of times that the tag is present.
       tags << tag
     end
     tags
