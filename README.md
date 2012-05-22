@@ -1,7 +1,8 @@
 Fork notes
 ----------
 
-Adding field weight(times the tag is used) to the Tag Object.
+Added field weight(times the tag is used) to the Tag Object.
+Added field credit(author) to the Photo Object.
 
 PicasaWebAlbums
 ===============
