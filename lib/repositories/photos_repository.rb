@@ -45,7 +45,6 @@ module PhotosRepository
     photo.file_name = entry.elements["media:group/media:title"].text
     photo.thumb = entry.elements["media:group/media:thumbnail"].attributes["url"]
     photo.credit = entry.elements["media:group/media:credit"].text
-    photo.author = entry.elements["author/name"].present ? entry.elements["author/name"].text : photo.credit
     photo
   end
 
