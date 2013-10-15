@@ -56,20 +56,35 @@ module AlbumsRepository
 
   private
 
+  def element_to_s(element)
+    return "" unless !element.nil?
+    element.text
+  end
+
+  def element_to_i(element)
+    return 0 unless !element.nil?
+    element.text.to_i
+  end
+
+  def element_get_attr(element,attribute)
+    return nil unless !element.nil?
+    element.attributes[attribute]
+  end
+
   def gallery_from_entry(entry)
     gallery = PicasaWebAlbums::Album.new
-    gallery.id = entry.elements["gphoto:id"].text
-    gallery.title = entry.elements["title"].text
-    gallery.date_created = DateTime.parse(entry.elements["published"].text)
-    gallery.date_updated = DateTime.parse(entry.elements["updated"].text)
-    gallery.slug = entry.elements["gphoto:name"].text
-    gallery.access = entry.elements["gphoto:access"].text
-    gallery.number_of_photos = entry.elements["gphoto:numphotos"].text.to_i
-    gallery.number_of_comments = (entry.elements["gphoto:commentCount"].text.to_i rescue 0 )
-    gallery.number_of_photos_remaining = (entry.elements["gphoto:numphotosremaining"].text.to_i rescue 0)
-    gallery.total_bytes = (entry.elements["gphoto:bytesUsed"].text.to_i rescue 0)
-    gallery.cover_photo_url = entry.elements["media:group/media:content"].attributes["url"]
-    gallery.description = entry.elements["media:group/media:description"].text
+    gallery.id = element_to_s(entry.elements["gphoto:id"])
+    gallery.title = element_to_s(entry.elements["title"])
+    gallery.date_created = DateTime.parse(element_to_s(entry.elements["published"]))
+    gallery.date_updated = DateTime.parse(element_to_s(entry.elements["updated"]))
+    gallery.slug = element_to_s(entry.elements["gphoto:name"])
+    gallery.access = element_to_s(entry.elements["gphoto:access"])
+    gallery.number_of_photos = element_to_i(entry.elements["gphoto:numphotos"])
+    gallery.number_of_comments = element_to_i(entry.elements["gphoto:commentCount"])
+    gallery.number_of_photos_remaining = element_to_i(entry.elements["gphoto:numphotosremaining"])
+    gallery.total_bytes = element_to_i(entry.elements["gphoto:bytesUsed"])
+    gallery.cover_photo_url = element_get_attr(entry.elements["media:group/media:content"],"url")
+    gallery.description = element_to_s(entry.elements["media:group/media:description"])
     gallery.edit_url = get_edit_url_from_entry(entry)
     gallery
   end
